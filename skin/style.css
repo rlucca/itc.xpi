@@ -1,0 +1,13 @@
+
+#itc-toolbar-button[state="false"] {
+    list-style-image: URL("chrome://icescrumtaskcreator/skin/closed_eyes.png");
+}
+
+#itc-toolbar-button[state="true"] {
+    list-style-image: URL("chrome://icescrumtaskcreator/skin/opened_eyes.png");
+}
+
+#itc-toolbar-button[openedwindow="true"] {
+    list-style-image: URL("chrome://icescrumtaskcreator/skin/colored_eyes.png");
+}
+

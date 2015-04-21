@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://icescrumtaskcreator/skin/style.css" type="text/css"?>
+
+<!DOCTYPE vbox SYSTEM "chrome://icescrumtaskcreator/locale/translations.dtd">
+
+
+<overlay id="sample" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="icescrumtaskcreator.js" />
+
+  <toolbarpalette id="BrowserToolbarPalette">
+	<toolbarbutton id="itc-toolbar-button" label="&itc.label;"
+			tooltiptext="&itc.tooltip;" type="menu-button" state="false"
+			class="chromeclass-toolbar-additional toolbarbutton-1"
+			oncommand="itc.toggleButton(event);">
+	  <menupopup id="itc-toolbar-button-popup-menu">
+		<menuitem label="&itc.preferences.label;"
+			oncommand="itc.showPreferences(event);" />
+	  </menupopup>
+    </toolbarbutton>
+  </toolbarpalette>
+</overlay>

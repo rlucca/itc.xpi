@@ -1,0 +1,18 @@
+<!--
+translations.dtd
+firefox - brasileiro
+
+Created by Ricardo R Lucca.
+-->
+<!ENTITY itc.label "Criador de Tarefas no Icescrum">
+<!ENTITY itc.tooltip "Criador de Tarefas no Icescrum intercepta algumas URLs e mostra uma janela básica para inserção do mesmo conteúdo. Isso torna o processo de criar tarefas simples e fácil.">
+<!ENTITY itc.bid "ID do Sprint">
+<!ENTITY itc.sid "ID da Estória">
+<!ENTITY itc.color.label "Cor da Tarefa">
+<!ENTITY itc.color.desc "Nome da cor que o Icescrum aceita">
+<!ENTITY itc.title.label "Título">
+<!ENTITY itc.title.error "Título é vazio ou insufficiente">
+<!ENTITY itc.description.label "Descrição">
+<!ENTITY itc.hour.label "Esforço estimado">
+<!ENTITY itc.hour.desc "Horas trabalhadas estimadas">
+<!ENTITY itc.preferences.label "Preferências">

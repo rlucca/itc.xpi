@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://icescrumtaskcreator/skin/style.css" type="text/css"?>
+
+<!DOCTYPE vbox SYSTEM "chrome://icescrumtaskcreator/locale/translations.dtd">
+
+<dialog id="xulschoolhello-hello-dialog"
+  title="&itc.label;"
+  buttons="accept,cancel"
+  ondialogaccept="return dlgAccept();"
+  ondialogcancel="return true;"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" src="icescrumtaskcreator.js" />
+	<script type="application/x-javascript" src="icescrumtaskcreator_task.js" />
+
+	<hbox width="100%">
+		<label value="&itc.color.label;" />
+		<textbox id="itc_color" value="Failed" />
+		<spacer flex="2" />
+		<label value="&itc.hour.label;" />
+		<textbox id="itc_hour" type="number" value="0" min="0" max="24" />
+	</hbox>
+
+	<label value="&itc.title.label;" />
+	<textbox id="itc_title" maxlength="100" onerrorDisplay="&itc.title.error;" />
+	<label value="&itc.description.label;" />
+	<textbox multiline="true" rows="6" id="itc_desc" />
+
+	<div id="divError" />
+</dialog>

@@ -1,0 +1,8 @@
+content	icescrumtaskcreator	chrome/content/
+overlay chrome://browser/content/browser.xul chrome://icescrumtaskcreator/content/toolbutton.xul
+
+locale	icescrumtaskcreator	en-US	locale/en-US/
+locale	icescrumtaskcreator	pt-BR	locale/pt-BR/
+
+skin	icescrumtaskcreator	classic/1.0	skin/
+style   chrome://global/content/customizeToolbar.xul    chrome://icescrumtaskcreator/skin/style.css

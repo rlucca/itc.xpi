@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+	<Description about="urn:mozilla:install-manifest">
+		<em:id>icescrumtaskcreator_rlucca@gmail.com</em:id>
+
+		<em:version>1.0</em:version>
+		<em:type>2</em:type>
+		<em:name>Icescrum Task Creator</em:name>
+		<em:creator>Ricardo Rodrigues Lucca</em:creator>
+		<em:description>A very basic way to create tasks in Icescrum and stay in the sprint backlog.</em:description>
+
+		<em:optionsURL>chrome://icescrumtaskcreator/content/preferences.xul</em:optionsURL>
+		<em:optionsType>2</em:optionsType>
+
+		<em:localized>
+			<Description>
+				<em:locale>pt-br</em:locale>
+				<em:name>Criador de Tarefas no Icescrum</em:name>
+				<em:creator>Ricardo Rodrigues Lucca</em:creator>
+				<em:description>Um jeito muito basico de criar tarefas no Icescrum e ficar no sprint backlog.</em:description>
+			</Description>
+		</em:localized>
+
+		<em:targetApplication>
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+				<em:minVersion>30.0</em:minVersion>
+				<em:maxVersion>100.*</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+	</Description>
+</RDF>

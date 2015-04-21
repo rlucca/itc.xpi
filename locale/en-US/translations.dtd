@@ -1,0 +1,18 @@
+<!--
+translations.dtd
+firefox - ingles americano
+
+Created by Ricardo R Lucca.
+-->
+<!ENTITY itc.label "Icescrum Task Creator">
+<!ENTITY itc.tooltip "Icescrum Task Creator intercepts a few URLs and show a basic window to insert the same content from that one. It makes the process of creating tasks simple and easy.">
+<!ENTITY itc.bid "Sprint's ID">
+<!ENTITY itc.sid "Story's ID">
+<!ENTITY itc.color.label "Task's color">
+<!ENTITY itc.color.desc "Name of the color accepts by Icescrum">
+<!ENTITY itc.title.label "Title">
+<!ENTITY itc.title.error "Title is empty or not enough">
+<!ENTITY itc.description.label "Description">
+<!ENTITY itc.hour.label "Estimated Effort">
+<!ENTITY itc.hour.desc "Estimated working hours">
+<!ENTITY itc.preferences.label "Preferences">

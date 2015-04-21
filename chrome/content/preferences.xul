@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE vbox SYSTEM "chrome://icescrumtaskcreator/locale/translations.dtd">
+
+<vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	onload="window.close();">
+  <setting
+	pref="extensions.icescrumtaskcreator.task.color"
+	type="string"
+	title="&itc.color.label;"
+	desc="&itc.color.desc;" />
+  <setting
+	pref="extensions.icescrumtaskcreator.task.hour"
+	type="integer"
+	title="&itc.hour.label;"
+	desc="&itc.hour.desc;"
+	min="1" max="12" />
+</vbox> 
