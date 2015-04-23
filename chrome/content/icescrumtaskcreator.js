@@ -10,8 +10,9 @@ if (typeof(itc) == "undefined")
             var oHttp = aSubject.QueryInterface(Components.interfaces.nsIHttpChannel);
 
 			//http://icescrum.aker.com.br/p/750/openWindow/sprintPlan/add/753/?story.id=7086
+			//http://icescrum.aker.com.br/p/750/openWindow/sprintPlan/add/753/?story.id={urgent,recurrent}
 			const urlExpr = 
-				"^https?://(.*?)/p/(\\d+)/openWindow/sprintPlan/add/(\\d+)/\\\?story\.id=(\\d+)$";
+				"^https?://(.*?)/p/(\\d+)/openWindow/sprintPlan/add/(\\d+)/\\\?story\.id=(.*?)$";
 			var matchingUrl = new RegExp(urlExpr, "i");
 			if (matchingUrl.test(oHttp.URI.spec))
 			{
