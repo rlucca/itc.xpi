@@ -1,4 +1,8 @@
 
+dialog {
+  background-color: -moz-dialog;
+}
+
 #itc-toolbar-button[state="false"] {
     list-style-image: URL("chrome://icescrumtaskcreator/skin/closed_eyes.png");
 }
