@@ -1,7 +1,9 @@
 
 if (typeof(itc) == "undefined")
 {
-	var httpReq = {
+	var httpReq = null;
+	var itc = null;
+	httpReq = {
 		observe: function (aSubject, aTopic, aData)
 		{
 			if (aTopic != 'http-on-modify-request')
@@ -38,7 +40,7 @@ if (typeof(itc) == "undefined")
 			}
 		}
 	};
-	var itc = {
+	itc = {
 		get prefs()
 		{
 			return Components.classes["@mozilla.org/preferences-service;1"]
