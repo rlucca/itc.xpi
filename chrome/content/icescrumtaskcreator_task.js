@@ -38,7 +38,7 @@ function dlgAccept()
 	request.onreadystatechange=function() {
 		if (request.readyState==4) {
 			var obj = JSON.parse(request.responseText);
-			if (typeof(obj.notice) != "undefined" && typeof(obj.notice.text) != "undefined")
+			if (typeof(obj.notice) == "object" && typeof(obj.notice.text) != "undefined")
 			{
 				document.getElementById("divError").innerHTML = obj.notice.text;
 			}
