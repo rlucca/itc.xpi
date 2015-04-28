@@ -3,6 +3,10 @@ if (typeof(window.arguments) == "undefined")
 	window.arguments = ["http://rlucca.homeunix.org/p/666/openWindow/sprintPlan/add/999/?story.id=010", "http://rlucca.homeunix.org", "666", "999", "010"]
 }
 
+function dlgCancel()
+{
+	return true;
+}
 
 function dlgAccept()
 {
