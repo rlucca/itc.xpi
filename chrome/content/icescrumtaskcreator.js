@@ -11,15 +11,20 @@ if (typeof(itc) == "undefined")
 
             var oHttp = aSubject.QueryInterface(Components.interfaces.nsIHttpChannel);
 
-			//http://icescrum.aker.com.br/p/750/openWindow/sprintPlan/add/753/?story.id=7086
-			//http://icescrum.aker.com.br/p/750/openWindow/sprintPlan/add/753/?story.id={urgent,recurrent}
+			//http://host/p/750/openWindow/sprintPlan/add/753/?story.id=urgent
+			//http://host/p/750/openWindow/sprintPlan/add/753/?story.id=recurrent
+			//http://host/p/750/openWindow/sprintPlan/add/753/?story.id=7086
 			const urlExpr = 
 				"^https?://(.*?)/p/(\\d+)/openWindow/sprintPlan/add/(\\d+)/\\\?story\.id=(.*?)$";
 			var matchingUrl = new RegExp(urlExpr, "i");
+
+			console.log("Is the URL [" + oHttp.URI.spec + "] a new task URL of IceScrum?");
+
 			if (matchingUrl.test(oHttp.URI.spec))
 			{
 				var matchingUrlExec = matchingUrl.exec(oHttp.URI.spec);
 
+				console.log("Yes. The new connection will be cancelled.");
 				aSubject.cancel(Components.results.NS_BINDING_ABORTED);
 
 				if (matchingUrlExec == null)
@@ -37,6 +42,10 @@ if (typeof(itc) == "undefined")
 										matchingUrlExec[4],
 										null);
 				}
+			}
+			else
+			{
+				console.log("No");
 			}
 		}
 	};
