@@ -16,3 +16,4 @@ Created by Ricardo R Lucca.
 <!ENTITY itc.hour.label "Estimated Effort">
 <!ENTITY itc.hour.desc "Estimated working hours">
 <!ENTITY itc.preferences.label "Preferences">
+<!ENTITY itc.error.task_creation "Ops... One task with the same name already exist or some other problem happened">
