@@ -39,15 +39,15 @@ function dlgAccept()
 	var request = new XMLHttpRequest();
 	request.onreadystatechange=function() {
 		if (request.readyState==4) {
-			var obj = JSON.parse(request.responseText);
-			if (typeof(obj.notice) == "object" && typeof(obj.notice.text) != "undefined")
+			console.log("IceScrum answered status " + request.status);
+			console.log("IceScrum answered text: " + request.responseText);
+			if (/^200 .*$/.test(request.statusText))
 			{
-				showDivError();
+				window.close();
 			}
 			else
 			{
-				document.getElementById("divError").innerHTML = "Ok";
-				window.close();
+				showDivError();
 			}
 		}
 	}
