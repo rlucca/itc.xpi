@@ -26,5 +26,5 @@
 	<label value="&itc.description.label;" />
 	<textbox multiline="true" rows="6" id="itc_desc" />
 
-	<div id="divError" />
+	<div id="divError" style="display: none;">&itc.error.task_creation;</div>
 </dialog>

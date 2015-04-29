@@ -32,7 +32,9 @@ function dlgAccept()
 				+ "&task.name=" + escape(document.getElementById("itc_title").value)
 				+ "&task.description=" + escape(document.getElementById("itc_desc").value);
 
-	var divF = function() {	document.getElementById("divError").innerHTML = "Ops... :-("; }
+	var showDivError = function() {
+		alert(document.getElementById("divError").textContent);
+	}
 
 	var request = new XMLHttpRequest();
 	request.onreadystatechange=function() {
@@ -40,7 +42,7 @@ function dlgAccept()
 			var obj = JSON.parse(request.responseText);
 			if (typeof(obj.notice) == "object" && typeof(obj.notice.text) != "undefined")
 			{
-				document.getElementById("divError").innerHTML = obj.notice.text;
+				showDivError();
 			}
 			else
 			{
@@ -49,8 +51,8 @@ function dlgAccept()
 			}
 		}
 	}
-	request.addEventListener("error", divF, false);
-	request.addEventListener("abort", divF, false);
+	request.addEventListener("error", showDivError, false);
+	request.addEventListener("abort", showDivError, false);
 
 	request.open("POST", postUrl);
 	//request.setRequestHeader("X-Requested-With", "XMLHttpRequest");
