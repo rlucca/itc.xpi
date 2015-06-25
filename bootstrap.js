@@ -1,6 +1,7 @@
 /********** IMPORTS **********/
 const Cu = Components.utils;
 const Ci = Components.interfaces;
+const Cc = Components.classes;
 //Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource:///modules/CustomizableUI.jsm");
@@ -55,78 +56,72 @@ var WindowListener =
 /********** WINDOW STUFF **********/
 function loadIntoWindow ()
 {
-	// Lets load the xul file using XMLHttpRequest
-	const tbxul = "chrome://icescrumtaskcreator/content/toolbutton.xul";
-	var request = new XMLHttpRequest();
-	request.mozBackgroundRequest = true;
-	// When the load is finished lets put it in the toolbar
-	request.addEventListener("load", function(event)
-		{
-		  var overlay = request.responseXML;
-		  var toolbutton = overlay.getElementById("itc-toolbar-button");
+  try {
+	appendCSS("chrome://icescrumtaskcreator/skin/style.css");
+	CustomizableUI.createWidget({
+		id: "itc-toolbar-button",
+		type: "custom", // the default is button
+		label: "seila",
+		tooltiptext: "seilanao",
+		onBuild: function(aDocument) {
+			var toolbarbutton = aDocument.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "toolbarbutton");
+			var menupopup = aDocument.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "menupopup");
+			var menuitem = aDocument.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "menuitem");
 
-		  try {
-			CustomizableUI.createWidget({
+			var tbb_props = {
 				id: "itc-toolbar-button",
-				type: "custom", // the default is button
-				label: toolbutton.getAttribute("label"),
-				tooltiptext: toolbutton.getAttribute("tooltiptext"),
-//				onCommand: function(aEvent) {
-//					var thisDOMWindow = aEvent.target.ownerDocument.defaultView; //this is the browser (xul) window
-//					var thisWindowsSelectedTabsWindow = thisDOMWindow.gBrowser.selectedTab.linkedBrowser.contentWindow; //this is the html window of the currently selected tab
-//					thisWindowsSelectedTabsWindow.alert('alert from html window of selected tab');
-//					thisDOMWindow.alert('alert from xul window');
-//				}
-				onBuild: function(aDocument) {
-					var itc = aDocument.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "script");
-					itc.setAttribute("type", "application/x-javascript");
-					itc.setAttribute("src", "chrome://icescrumtaskcreator/content/icescrumtaskcreator.js");
-					var toolbarbutton = aDocument.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "toolbarbutton");
-					var menupopup = aDocument.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "menupopup");
-					var menuitem = aDocument.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "menuitem");
-
-					var tbb_props = {
-						id: "itc-toolbar-button",
-						label: "banana",
-						tooltiptext: "cerveja",
-						type: "menu-button",
-						class: "chromeclass-toolbar-additional toolbarbutton-1",
-						removable: "true",
-						state: "false",
-						oncommand: "javascript:alert('42'); event.stopPropagation();"
-					}
-					var mp_props = {
-						id: "itc-toolbar-button-popup-menu"
-					}
-					var mi_props = {
-						id: "itc-toolbar-button-popup-menu-item1",
-						label: "hahaha",
-						tooltiptext: "tooltipsexy",
-						oncommand: "javascript:alert('21'); event.stopPropagation();"
-					}
-					var setAllAttribs = function (obj, props) {
-						for (var p in props) {
-							obj.setAttribute(p, props[p]);
-						}
-					}
-					setAllAttribs(toolbarbutton, tbb_props);
-					setAllAttribs(menupopup, mp_props);
-					setAllAttribs(menuitem, mi_props);
-
-					toolbarbutton.appendChild(menupopup);
-					menupopup.appendChild(menuitem);
-
-					return toolbarbutton;
+				label: "banana",
+				tooltiptext: "cerveja",
+				type: "menu-button",
+				class: "chromeclass-toolbar-additional toolbarbutton-1",
+				removable: "true",
+				state: "false",
+				oncommand: "javascript: alert('42'); event.stopPropagation();"
+			}
+			var mp_props = {
+				id: "itc-toolbar-button-popup-menu"
+			}
+			var mi_props = {
+				id: "itc-toolbar-button-popup-menu-item1",
+				label: "hahaha",
+				tooltiptext: "tooltipsexy",
+				oncommand: "javascript:alert(itc.fufufu()); event.stopPropagation();"
+			}
+			var setAllAttribs = function (obj, props) {
+				for (var p in props) {
+					obj.setAttribute(p, props[p]);
 				}
-			});
-		  } catch (e) {
-			console.log("Ops... " + e);
-		  }
-		}, false);
-	request.open("GET", tbxul);
-	request.send(null);
+			}
 
-	console.log("load overlay called");
+			setAllAttribs(toolbarbutton, tbb_props);
+			setAllAttribs(menupopup, mp_props);
+			setAllAttribs(menuitem, mi_props);
+
+			toolbarbutton.appendChild(menupopup);
+			menupopup.appendChild(menuitem);
+
+			return toolbarbutton;
+		}
+	});
+  } catch (e) {
+	console.log("Ops... " + e);
+  }
+}
+
+function appendCSS(URI)
+{
+	let io =
+	  Cc["@mozilla.org/network/io-service;1"].
+		getService(Ci.nsIIOService);
+
+	// the 'style' directive isn't supported in chrome.manifest for
+	// bootstrapped extensions, so this is the manual way of doing
+	// the same.
+	this._ss =
+	  Cc["@mozilla.org/content/style-sheet-service;1"].
+		getService(Ci.nsIStyleSheetService);
+	this._uri = io.newURI(URI, null, null);
+	this._ss.loadAndRegisterSheet(this._uri, this._ss.USER_SHEET);
 }
 
 function unloadFromWindow ()
@@ -139,6 +134,7 @@ function unloadFromWindow ()
 	}
 	console.log("unload overlay");
 }
+
 function forEachOpenWindow(todo)  // Apply a function to all open browser windows
 {
     var windows = Services.wm.getEnumerator("navigator:browser");
