@@ -13,6 +13,7 @@
 
 		<em:optionsURL>chrome://icescrumtaskcreator/content/preferences.xul</em:optionsURL>
 		<em:optionsType>2</em:optionsType>
+		<em:bootstrap>true</em:bootstrap>
 
 		<em:localized>
 			<Description>
