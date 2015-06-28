@@ -109,6 +109,7 @@ if (typeof(itc) == "undefined")
 			Components.utils.import('resource://gre/modules/Services.jsm');
 			Services.obs.removeObserver(httpReq, "http-on-modify-request");
 		},
+		fufufu: function() {  return "kkkkLLLmmmkkkk"; }
 	};
 }
 

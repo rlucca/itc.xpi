@@ -2,10 +2,16 @@
 const Cu = Components.utils;
 const Ci = Components.interfaces;
 const Cc = Components.classes;
-//Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource:///modules/CustomizableUI.jsm");
 Cu.importGlobalProperties(["XMLHttpRequest"]);
+
+//Services.scriptloader.loadSubScript("resource://icescrumtaskcreator/icescrumtaskcreator.js", this, "UTF-8");
+//let itc = this.__foo;
+//delete this.__foo;
+//function bla() { return itc.haha(); }
+//console.log(bla());
+
 
 /********** BOOTSTRAP API **********/
 function install(parms, reason) {}
@@ -44,7 +50,7 @@ var WindowListener =
             window.removeEventListener("load",onWindowLoad);
             if (window.document.documentElement.getAttribute("windowtype") == "navigator:browser")
 			{
-				loadIntoWindow();
+				loadIntoWindow(window);
 			}
         }
 		console.log("open window called putting observer on load window");
@@ -54,10 +60,12 @@ var WindowListener =
     onWindowTitleChange: function(xulWindow, newTitle) { }
 };
 /********** WINDOW STUFF **********/
-function loadIntoWindow ()
+function loadIntoWindow (aWindow)
 {
   try {
 	appendCSS("chrome://icescrumtaskcreator/skin/style.css");
+	Services.scriptloader.loadSubScript("chrome://icescrumtaskcreator/content/icescrumtaskcreator.js", aWindow);
+console.debug(aWindow.itc.fufufu());
 	CustomizableUI.createWidget({
 		id: "itc-toolbar-button",
 		type: "custom", // the default is button
@@ -67,6 +75,10 @@ function loadIntoWindow ()
 			var toolbarbutton = aDocument.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "toolbarbutton");
 			var menupopup = aDocument.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "menupopup");
 			var menuitem = aDocument.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "menuitem");
+			var script = aDocument.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "script");
+			script.setAttribute("type", "application/x-javascript");
+			script.setAttribute("src", "chrome://icescrumtaskcreator/content/icescrumtaskcreator.js");
+			script.setAttribute("id", "nonsesnsePutAId");
 
 			var tbb_props = {
 				id: "itc-toolbar-button",
@@ -85,7 +97,7 @@ function loadIntoWindow ()
 				id: "itc-toolbar-button-popup-menu-item1",
 				label: "hahaha",
 				tooltiptext: "tooltipsexy",
-				oncommand: "javascript:alert(itc.fufufu()); event.stopPropagation();"
+				oncommand: "itc.showPreferences(event);"
 			}
 			var setAllAttribs = function (obj, props) {
 				for (var p in props) {
@@ -97,6 +109,7 @@ function loadIntoWindow ()
 			setAllAttribs(menupopup, mp_props);
 			setAllAttribs(menuitem, mi_props);
 
+			script.appendChild(toolbarbutton);
 			toolbarbutton.appendChild(menupopup);
 			menupopup.appendChild(menuitem);
 

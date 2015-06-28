@@ -1,4 +1,4 @@
-content	icescrumtaskcreator	chrome/content/
+content	 icescrumtaskcreator	chrome/content/
 overlay chrome://browser/content/browser.xul chrome://icescrumtaskcreator/content/toolbutton.xul
 
 locale	icescrumtaskcreator	en-US	locale/en-US/
