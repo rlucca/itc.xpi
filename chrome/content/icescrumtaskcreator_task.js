@@ -69,6 +69,11 @@ function itc_load_defaults()
 	document.getElementById("itc_color").value = itc.prefs.getCharPref("task.color");
 	document.getElementById("itc_hour").value = itc.prefs.getIntPref("task.hour");
 	changeButton("waiting");
+
+	// URL will change, but because the state it will not reload!
+	var sprintPlan = new String(window.opener.content.location);
+	sprintPlan = sprintPlan.substr(0, sprintPlan.indexOf("/add"));
+	window.opener.content.location = sprintPlan;
 }
 
 function isActivate()
