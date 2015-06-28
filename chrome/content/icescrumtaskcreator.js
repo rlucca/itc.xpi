@@ -60,7 +60,7 @@ if (typeof(itc) == "undefined")
 		isActivate: function ()
 		{
 			const btn = document.getElementById("itc-toolbar-button");
-			return btn.getAttribute("state") == "true";
+			return !(btn.getAttribute("state") == "false");
 		},
 
 		toggleState: function ()

@@ -5,6 +5,7 @@ if (typeof(window.arguments) == "undefined")
 
 function dlgCancel()
 {
+	if (isActivate()) changeButton("true");
 	return true;
 }
 
@@ -18,6 +19,8 @@ function dlgAccept()
 	const referer = Uri.substr(0, Uri.indexOf("openWindow"));
 	const postUrl = referer + "task/save";
 	var objTitle = document.getElementById("itc_title");
+
+	if (isActivate()) changeButton("true");
 
 	if (objTitle.value.length <= 3)
 	{
@@ -65,6 +68,20 @@ function itc_load_defaults()
 {
 	document.getElementById("itc_color").value = itc.prefs.getCharPref("task.color");
 	document.getElementById("itc_hour").value = itc.prefs.getIntPref("task.hour");
+	changeButton("waiting");
+}
+
+function isActivate()
+{
+	return !(window.opener.document
+				.getElementById("itc-toolbar-button")
+				.getAttribute("state") == "false") || false;
+}
+function changeButton(newState)
+{
+	window.opener.document
+		.getElementById("itc-toolbar-button")
+		.setAttribute("state", newState);
 }
 
 window.addEventListener("load", function load(event){
