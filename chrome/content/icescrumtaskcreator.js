@@ -65,15 +65,12 @@ if (typeof(itc) == "undefined")
 
 		toggleState: function ()
 		{
-			var btn = document.getElementById("itc-toolbar-button");
 			if (!this.isActivate())
 			{
-				btn.setAttribute("state", "true");
 				this.activate();
 			}
 			else
 			{
-				btn.setAttribute("state", "false");
 				this.deactivate();
 			}
 		},
@@ -96,18 +93,34 @@ if (typeof(itc) == "undefined")
 			ev.stopPropagation();
 		},
 
+		_changeButton: function(newState)
+		{
+			var btn = document.getElementById("itc-toolbar-button");
+			btn.setAttribute("state", newState);
+		},
+
 		activate: function()
 		{
 			console.log("[ITC] adding listener of watching HTTP requests");
 			Components.utils.import('resource://gre/modules/Services.jsm');
-			Services.obs.addObserver(httpReq, "http-on-modify-request", false);
+			try {
+				Services.obs.addObserver(httpReq, "http-on-modify-request", false);
+				this._changeButton(true);
+			} catch (e) {
+				console.log("[ITC] failed to add observer");
+			}
 		},
 
 		deactivate: function()
 		{
 			console.log("[ITC] removing listener of watching HTTP requests");
 			Components.utils.import('resource://gre/modules/Services.jsm');
-			Services.obs.removeObserver(httpReq, "http-on-modify-request");
+			try {
+				Services.obs.removeObserver(httpReq, "http-on-modify-request");
+				this._changeButton(false);
+			} catch (e) {
+				console.log("[ITC] failed to remove observer");
+			}
 		},
 	};
 }
