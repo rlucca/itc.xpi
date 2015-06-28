@@ -24,7 +24,7 @@
 	<label value="&itc.title.label;" />
 	<textbox id="itc_title" maxlength="100" onerrorDisplay="&itc.title.error;" />
 	<label value="&itc.description.label;" />
-	<textbox multiline="true" rows="6" id="itc_desc" />
+	<textbox multiline="true" maxlength="3000" rows="6" id="itc_desc" />
 
 	<div id="divError" style="display: none;">&itc.error.task_creation;</div>
 </dialog>
