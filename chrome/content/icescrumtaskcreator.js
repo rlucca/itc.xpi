@@ -12,6 +12,24 @@ if (typeof(itc) == "undefined")
 			return false;
 		},
 
+		isInterestingURL: function(URL)
+		{
+			//http://host/p/750/openWindow/sprintPlan(...)
+			const interestingExpr =
+				"^https?://.*?/p/\\d+/openWindow/sprintPlan";
+
+			console.log("[ITC] Is the URL [" + URL + "] interesting?");
+
+			if (!this.checkUrlByExpr(URL, interestingExpr))
+			{
+				console.log("[ITC] No");
+				return false;
+			}
+
+			console.log("[ITC] Yes");
+			return true;
+		},
+
 		isTaskURL: function(URL)
 		{
 			//http://host/p/750/openWindow/sprintPlan/add/753/?story.id=urgent
@@ -28,6 +46,11 @@ if (typeof(itc) == "undefined")
 				return ;
 
             var oHttp = aSubject.QueryInterface(Components.interfaces.nsIHttpChannel);
+
+			if (!this.isInterestingURL(oHttp.URI.spec))
+			{
+				return ;
+			}
 
 
 			var taskMatch = this.isTaskURL(oHttp.URI.spec);
