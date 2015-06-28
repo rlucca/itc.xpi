@@ -30,6 +30,14 @@ if (typeof(itc) == "undefined")
 			return true;
 		},
 
+		isSprintPlanURL: function(URL)
+		{
+			//http://host/p/750/openWindow/sprintPlan
+			const sprintPlanExpr =
+				"^https?://.*?/p/\\d+/openWindow/sprintPlan$";
+			return !!this.checkUrlByExpr(URL, sprintPlanExpr);
+		},
+
 		isTaskURL: function(URL)
 		{
 			//http://host/p/750/openWindow/sprintPlan/add/753/?story.id=urgent
@@ -52,6 +60,12 @@ if (typeof(itc) == "undefined")
 				return ;
 			}
 
+			if (itc.isWaiting() && this.isSprintPlanURL(oHttp.URI.spec))
+			{
+				console.log("[ITC] sprintPlan reload will be cancelled.");
+				aSubject.cancel(Components.results.NS_BINDING_ABORTED);
+				return ;
+			}
 
 			var taskMatch = this.isTaskURL(oHttp.URI.spec);
 
@@ -92,6 +106,12 @@ if (typeof(itc) == "undefined")
 		{
 			const btn = document.getElementById("itc-toolbar-button");
 			return !(btn.getAttribute("state") == "false");
+		},
+
+		isWaiting: function ()
+		{
+			const btn = document.getElementById("itc-toolbar-button");
+			return btn.getAttribute("state") == "waiting";
 		},
 
 		toggleState: function ()
