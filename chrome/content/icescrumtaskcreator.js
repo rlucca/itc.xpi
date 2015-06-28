@@ -4,6 +4,24 @@ if (typeof(itc) == "undefined")
 	var httpReq = null;
 	var itc = null;
 	httpReq = {
+		checkUrlByExpr: function (Url, Expr)
+		{
+			var match = new RegExp(Expr, "i");
+			if (match.test(Url))
+				return match;
+			return false;
+		},
+
+		isTaskURL: function(URL)
+		{
+			//http://host/p/750/openWindow/sprintPlan/add/753/?story.id=urgent
+			//http://host/p/750/openWindow/sprintPlan/add/753/?story.id=recurrent
+			//http://host/p/750/openWindow/sprintPlan/add/753/?story.id=7086
+			const taskExpr =
+				"^https?://(.*?)/p/(\\d+)/openWindow/sprintPlan/add/(\\d+)/\\\?story\.id=(.*?)$";
+			return this.checkUrlByExpr(URL, taskExpr);
+		},
+
 		observe: function (aSubject, aTopic, aData)
 		{
 			if (aTopic != 'http-on-modify-request')
@@ -11,25 +29,19 @@ if (typeof(itc) == "undefined")
 
             var oHttp = aSubject.QueryInterface(Components.interfaces.nsIHttpChannel);
 
-			//http://host/p/750/openWindow/sprintPlan/add/753/?story.id=urgent
-			//http://host/p/750/openWindow/sprintPlan/add/753/?story.id=recurrent
-			//http://host/p/750/openWindow/sprintPlan/add/753/?story.id=7086
-			const urlExpr = 
-				"^https?://(.*?)/p/(\\d+)/openWindow/sprintPlan/add/(\\d+)/\\\?story\.id=(.*?)$";
-			var matchingUrl = new RegExp(urlExpr, "i");
 
-			console.log("Is the URL [" + oHttp.URI.spec + "] a new task URL of IceScrum?");
+			var taskMatch = this.isTaskURL(oHttp.URI.spec);
 
-			if (matchingUrl.test(oHttp.URI.spec))
+			if (!!taskMatch)
 			{
-				var matchingUrlExec = matchingUrl.exec(oHttp.URI.spec);
+				var matchingUrlExec = taskMatch.exec(oHttp.URI.spec);
 
-				console.log("Yes. The new connection will be cancelled.");
+				console.log("[ITC] Connection to task page will be cancelled.");
 				aSubject.cancel(Components.results.NS_BINDING_ABORTED);
 
 				if (matchingUrlExec == null)
 				{
-					alert("Ohhh :-(");
+					console.log("[ITC] Could not retrieve data");
 				}
 				else
 				{
@@ -42,10 +54,6 @@ if (typeof(itc) == "undefined")
 										matchingUrlExec[4],
 										null);
 				}
-			}
-			else
-			{
-				console.log("No");
 			}
 		}
 	};
