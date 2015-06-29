@@ -42,9 +42,10 @@ function dlgAccept()
 	var request = new XMLHttpRequest();
 	request.onreadystatechange=function() {
 		if (request.readyState==4) {
-			console.log("IceScrum answered status " + request.status);
-			console.log("IceScrum answered text: " + request.responseText);
-			if (/^200 .*$/.test(request.statusText))
+			console.log("IceScrum answered status [" + request.status + "]");
+			console.log("IceScrum answered statusText [" + request.statusText + "]");
+			console.log("IceScrum answered text [" + request.responseText + "]");
+			if ((request.status/100) == 2 || request.statusText == "OK")
 			{
 				window.close();
 			}
