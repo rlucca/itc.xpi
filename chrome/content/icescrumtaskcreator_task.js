@@ -28,12 +28,12 @@ function dlgAccept()
 		return false;
 	}
 
-	var data = "task.parentStory.id=" + escape(storyId)
-				+ "&task.sprint.id=" + escape(backlogId)
-				+ "&task.color=" + escape(document.getElementById("itc_color").value)
-				+ "&task.estimation=" + escape(document.getElementById("itc_hour").value)
-				+ "&task.name=" + escape(document.getElementById("itc_title").value)
-				+ "&task.description=" + escape(document.getElementById("itc_desc").value);
+	var data = "task.parentStory.id=" + encodeURI(storyId)
+				+ "&task.sprint.id=" + encodeURI(backlogId)
+				+ "&task.color=" + encodeURI(document.getElementById("itc_color").value)
+				+ "&task.estimation=" + encodeURI(document.getElementById("itc_hour").value)
+				+ "&task.name=" + encodeURI(document.getElementById("itc_title").value)
+				+ "&task.description=" + encodeURI(document.getElementById("itc_desc").value);
 
 	var showDivError = function() {
 		alert(document.getElementById("divError").textContent);
@@ -60,7 +60,7 @@ function dlgAccept()
 
 	request.open("POST", postUrl);
 	//request.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	request.send(data);
 	return false;
 }
