@@ -15,6 +15,10 @@
 	  <menupopup id="itc-toolbar-button-popup-menu">
 		<menuitem label="&itc.preferences.label;"
 			oncommand="itc.showPreferences(event);" />
+		<menuitem label="&itc.batchingmode.label;"
+			id="itc-batch-mode"
+			type="checkbox" checked="false"
+			oncommand="itc.toggleBatchingMode(event);" />
 	  </menupopup>
     </toolbarbutton>
   </toolbarpalette>

@@ -17,3 +17,4 @@ Created by Ricardo R Lucca.
 <!ENTITY itc.hour.desc "Horas trabalhadas estimadas">
 <!ENTITY itc.preferences.label "Preferências">
 <!ENTITY itc.error.task_creation "Opa... Uma tarefa com o mesmo nome ja existe ou algo deu errado">
+<!ENTITY itc.batchingmode.label "Modo em lote">

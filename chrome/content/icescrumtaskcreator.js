@@ -173,6 +173,12 @@ if (typeof(itc) == "undefined")
 				console.log("[ITC] failed to remove observer");
 			}
 		},
+
+		toggleBatchingMode: function (ev)
+		{
+			ev.stopPropagation();
+		},
+
 	};
 }
 
