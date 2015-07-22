@@ -54,24 +54,25 @@ if (typeof(itc) == "undefined")
 				return ;
 
             var oHttp = aSubject.QueryInterface(Components.interfaces.nsIHttpChannel);
+			var link = oHttp.URI.spec;
 
-			if (!this.isInterestingURL(oHttp.URI.spec))
+			if (!this.isInterestingURL(link))
 			{
 				return ;
 			}
 
-			if (itc.isWaiting() && this.isSprintPlanURL(oHttp.URI.spec))
+			if (itc.isWaiting() && this.isSprintPlanURL(link))
 			{
 				console.log("[ITC] sprintPlan reload will be cancelled.");
 				aSubject.cancel(Components.results.NS_BINDING_ABORTED);
 				return ;
 			}
 
-			var taskMatch = this.isTaskURL(oHttp.URI.spec);
+			var taskMatch = this.isTaskURL(link);
 
 			if (!!taskMatch)
 			{
-				var matchingUrlExec = taskMatch.exec(oHttp.URI.spec);
+				var matchingUrlExec = taskMatch.exec(link);
 
 				console.log("[ITC] Connection to task page will be cancelled.");
 				aSubject.cancel(Components.results.NS_BINDING_ABORTED);
