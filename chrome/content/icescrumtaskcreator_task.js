@@ -79,11 +79,23 @@ function itc_load_defaults()
 
 	if (isActivate()) changeButton("waiting");
 
-	document.getElementById("itc_color").value = itc.prefs.getCharPref("task.color");
-	document.getElementById("itc_hour").value = itc.prefs.getIntPref("task.hour");
+	if (itc.isBatchModeOn() && type == "QUICKLOOK")
+	{
+		document.getElementById("itc_title").value = itc.prefs.getCharPref("batch_mode.title");
+		document.getElementById("itc_desc").value = itc.prefs.getCharPref("batch_mode.description");
+		document.getElementById("itc_color").value = itc.prefs.getCharPref("batch_mode.hour");
+		document.getElementById("itc_hour").value = itc.prefs.getCharPref("batch_mode.color");
+		dlgAccept();
+		return ;
+	}
+	else
+	{
+		document.getElementById("itc_color").value = itc.prefs.getCharPref("task.color");
+		document.getElementById("itc_hour").value = itc.prefs.getIntPref("task.hour");
 
-	if (type == "UPDATE")
-		return ; // We don't need change de location
+		if (type == "UPDATE")
+			return ; // We don't need change de location
+	}
 
 	// URL will change, but because the state it will not reload!
 	var sprintPlan = new String(window.opener.content.location);

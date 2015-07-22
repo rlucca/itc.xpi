@@ -63,8 +63,10 @@ if (typeof(itc) == "undefined")
 
             var oHttp = aSubject.QueryInterface(Components.interfaces.nsIHttpChannel);
 			var link = oHttp.URI.spec;
+			var type_parm = "TASK_LINK";
+			var qlMatch = this.isQuickLookURL(link);
 
-			if (!this.isInterestingURL(link))
+			if (!this.isInterestingURL(link) && !qlMatch)
 			{
 				return ;
 			}
@@ -74,6 +76,18 @@ if (typeof(itc) == "undefined")
 				console.log("[ITC] sprintPlan reload will be cancelled.");
 				aSubject.cancel(Components.results.NS_BINDING_ABORTED);
 				return ;
+			}
+
+			if (itc.isBatchModeOn() && !!qlMatch)
+			{
+				var matchingUrlExec = qlMatch.exec(link);
+				const name = "menu-add-task-" + matchingUrlExec[3];
+				const add_task_href = content.document.getElementById(name).getElementsByTagName("a")[0].href;
+				prelink = link.substr(0, link.indexOf("/quickLook"));
+				poslink = add_task_href.substr(add_task_href.indexOf("#") + 1);
+				link = prelink + "/openWindow/" + poslink;
+				type_parm = "QUICKLOOK";
+				console.log("[ITC] Changing link to add task: " + link);
 			}
 
 			var taskMatch = this.isTaskURL(link);
@@ -96,6 +110,7 @@ if (typeof(itc) == "undefined")
 										matchingUrlExec[0],
 										matchingUrlExec[3],
 										matchingUrlExec[4],
+										type_parm,
 										null);
 				}
 			}
