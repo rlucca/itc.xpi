@@ -48,6 +48,14 @@ if (typeof(itc) == "undefined")
 			return this.checkUrlByExpr(URL, taskExpr);
 		},
 
+		isQuickLookURL: function(URL)
+		{
+			//http://host/p/44622/quickLook?story.id=128217
+			const quickLookExpr =
+				"^https?://(.*?)/p/(\\d+)/quickLook\\\?story\.id=(.*?)$";
+			return this.checkUrlByExpr(URL, quickLookExpr);
+		},
+
 		observe: function (aSubject, aTopic, aData)
 		{
 			if (aTopic != 'http-on-modify-request')
