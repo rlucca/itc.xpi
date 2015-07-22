@@ -175,9 +175,29 @@ if (typeof(itc) == "undefined")
 
 		toggleBatchingMode: function (ev)
 		{
+			const btn = document.getElementById("itc-batch-mode");
+
+			// checked already uptodate before function be called
+			if (btn.getAttribute("checked") == "true")
+			{
+				window.openDialog("chrome://icescrumtaskcreator/content/task.xul",
+									"taskDialog", "centerscreen",
+									"Invalid data, openWindow,",
+									"will be used here to fill it",
+									"because it wont be used",
+									"UPDATE",
+									null);
+			}
+
 			ev.stopPropagation();
 		},
 
+		isBatchModeOn: function()
+		{
+			if (typeof(window.opener) == "undefined" || window.opener == null)
+				return (document.getElementById("itc-batch-mode").getAttribute("checked") == "true");
+			return (window.opener.document.getElementById("itc-batch-mode").getAttribute("checked") == "true");
+		},
 	};
 }
 

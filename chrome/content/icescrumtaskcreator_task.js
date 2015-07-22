@@ -27,6 +27,15 @@ function dlgAccept()
 		return false;
 	}
 
+	if (type == "UPDATE")
+	{
+		itc.prefs.setCharPref("batch_mode.title", document.getElementById("itc_title").value);
+		itc.prefs.setCharPref("batch_mode.description", document.getElementById("itc_desc").value);
+		itc.prefs.setCharPref("batch_mode.hour", document.getElementById("itc_color").value);
+		itc.prefs.setCharPref("batch_mode.color", document.getElementById("itc_hour").value);
+		return true;
+	}
+
 	var data = "task.parentStory.id=" + encodeURI(storyId)
 				+ "&task.sprint.id=" + encodeURI(backlogId)
 				+ "&task.color=" + encodeURI(document.getElementById("itc_color").value)
@@ -66,9 +75,15 @@ function dlgAccept()
 
 function itc_load_defaults()
 {
+	const type = window.arguments[3];
+
+	if (isActivate()) changeButton("waiting");
+
 	document.getElementById("itc_color").value = itc.prefs.getCharPref("task.color");
 	document.getElementById("itc_hour").value = itc.prefs.getIntPref("task.hour");
-	if (isActivate()) changeButton("waiting");
+
+	if (type == "UPDATE")
+		return ; // We don't need change de location
 
 	// URL will change, but because the state it will not reload!
 	var sprintPlan = new String(window.opener.content.location);
