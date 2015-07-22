@@ -85,8 +85,6 @@ if (typeof(itc) == "undefined")
 					window.openDialog("chrome://icescrumtaskcreator/content/task.xul",
 										"taskDialog", "centerscreen",
 										matchingUrlExec[0],
-										matchingUrlExec[1],
-										matchingUrlExec[2],
 										matchingUrlExec[3],
 										matchingUrlExec[4],
 										null);

@@ -12,10 +12,9 @@ function dlgCancel()
 function dlgAccept()
 {
 	const Uri = window.arguments[0];
-	const server = window.arguments[1];
-	const projectId = window.arguments[2];
-	const backlogId = window.arguments[3];
-	const storyId = window.arguments[4];
+	const backlogId = window.arguments[1];
+	const storyId = window.arguments[2];
+	const type = window.arguments[3];
 	const referer = Uri.substr(0, Uri.indexOf("openWindow"));
 	const postUrl = referer + "task/save";
 	var objTitle = document.getElementById("itc_title");
